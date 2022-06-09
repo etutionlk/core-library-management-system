@@ -85,6 +85,24 @@ paths:
           description: Genre Not Found
         '500':
           description: Internal Server Error
+    delete:
+      summary: Deletes a single genre by id.
+      description: Deletes  a genre by its genre id
+      tags:
+        - genres
+      parameters:
+        - name: genre_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '202':
+          description: OK
+        '404':
+          description: Genre is Not Found
+        '500':
+          description: Internal Server Error
   /genres/{genre_name}:
     get:
       summary: Returns a single genre by id.
@@ -132,7 +150,8 @@ components:
         genre_name:
           type: string
         status:
-          type: string
+          schema:
+          $ref: '#/components/schemas/Status'
     Status:
       type: string
       enum:
