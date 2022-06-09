@@ -103,6 +103,34 @@ paths:
           description: Genre is Not Found
         '500':
           description: Internal Server Error
+    put:
+      summary: Update a single genre by id.
+      description: Updates  a genre by its genre id
+      tags:
+        - genres
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - name:  ssss
+                  $ref: '#/components/schemas/UpdateStatus'
+                - $ref: '#/components/schemas/UpdateGenre'
+
+      parameters:
+        - name: genre_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '202':
+          description: OK
+        '404':
+          description: Genre is Not Found
+        '500':
+          description: Internal Server Error
   /genres/{genre_name}:
     get:
       summary: Returns a single genre by id.
@@ -130,6 +158,16 @@ paths:
 
 components:
   schemas:
+    UpdateStatus:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/Status'
+    UpdateGenre:
+      type: object
+      properties:
+        genre_name:
+          type: string
     Genre:
       type: object
       properties:
